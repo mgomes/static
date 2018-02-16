@@ -4,7 +4,7 @@ import (
 	"io"
 	"io/ioutil"
 
-	"github.com/russross/blackfriday"
+	"github.com/russross/blackfriday.v2"
 )
 
 // Markdown returns a reader transformed to markdown.
@@ -18,7 +18,7 @@ func Markdown(r io.Reader) io.ReadCloser {
 			return
 		}
 
-		pw.Write(blackfriday.MarkdownCommon(b))
+		pw.Write(blackfriday.Run(b))
 		pw.Close()
 	}()
 
