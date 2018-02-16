@@ -26,7 +26,7 @@ func SyntaxHighlight(r io.Reader) io.ReadCloser {
 		}
 
 		formatter := html.New(html.WithClasses())
-		doc.Find("pre > code").Each(func(i int, s *dom.Selection) {
+		doc.Find("pre").Each(func(i int, s *dom.Selection) {
 			lexer := detectLexer(s)
 			code := s.Contents().Text()
 
@@ -43,7 +43,7 @@ func SyntaxHighlight(r io.Reader) io.ReadCloser {
 				return
 			}
 
-			// Parent() because chroma html is already in a <pre><code>.
+			// Parent() because chroma html is already in a <pre></pre>.
 			s.Parent().ReplaceWithHtml(buf.String())
 		})
 
